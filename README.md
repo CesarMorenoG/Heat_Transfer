@@ -1,3 +1,3 @@
 # HearTransfer
 
-This matlab program solves the poisson equation for linear boundary conditions in the context of heat trasfer for rectangular geometries
+This matlab program aproximates the solution for the poisson equation with linear boundary conditions in the context of heat trasfer for rectangular geometries using the finite element method
