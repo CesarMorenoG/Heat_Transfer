@@ -1,7 +1,9 @@
-function [ orden,Ex,Ey,Lx,Ly,Lcx,Lcy,A_e,A_geo,Q_gen,kx,ky ] = Data()
+function [ Coord,Order,Ex,Ey,Lx,Ly,Lcx,Lcy,A_e,A_geo,Q_gen,kx,ky ] = Data()
+
+Coord=input('What coordinate system are you using (Cartesian:1, Cylindrical:2): ');
 
 %Solicita el orden de las funciones de interpolacion
-orden=input('Select the order of the interpolation functions (1,2): ');
+Order=input('Select the order of the interpolation functions (1,2): ');
 
 %Solicita la longitud de la geometria
 Longitud_x=input('Length of the geometry in the x direction: ');
@@ -11,9 +13,9 @@ Longitud_y=input('Length of the geometry in the y direction: ');
 Ex=input('Number of elements in the x direction: ');
 Ey=input('Number of elements in the y direction: ');
 
-control=input('Are the elements of uniform size?(Si:1,No:0) ');
+control=input('Are the elements of uniform size?(Yes:1,No:0) ');
 
-if orden == 1
+if Order == 1
     A_e=[1 2;3 4];
 
     A_geo=zeros(Ey+1,Ex+1);
@@ -24,7 +26,7 @@ if orden == 1
     end
 end
 
-if orden == 2
+if Order == 2
     A_e=[1 2 3;4 5 6;7 8 9];
 
     A_geo=zeros(2*Ey+1,2*Ex+1);

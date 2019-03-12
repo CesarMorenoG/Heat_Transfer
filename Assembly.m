@@ -1,6 +1,6 @@
-function [ MK,VQ ] = Assembly( orden,Ex,Ey,A_e,A_geo,K,Q  )
+function [ MK,VQ ] = Assembly( Order,Ex,Ey,A_e,A_geo,K,Q  )
 
-if orden == 1
+if Order == 1
 MK=zeros((Ex+1)*(Ey+1));
 VQ=zeros((Ex+1)*(Ey+1),1);
 for ny=1:Ey 
@@ -21,7 +21,7 @@ end
 end
 end
 
-if orden == 2
+if Order == 2
 MK=zeros((2*Ex+1)*(2*Ey+1));
 VQ=zeros((2*Ex+1)*(2*Ey+1),1);
 for ny=1:Ey 

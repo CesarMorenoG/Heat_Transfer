@@ -1,6 +1,6 @@
-function [ ] = Graph( orden,Ex,Ey,Lx,Ly,Lcx,Lcy,Heat )
+function [ ] = Graph( Order,Ex,Ey,Lx,Ly,Lcx,Lcy,Heat )
 
-if orden == 1
+if Order == 1
 for ny=1:Ey
 for nx=1:Ex
     X=linspace(Lcx(nx),Lcx(nx+1));
@@ -23,7 +23,7 @@ end
 end
 end
 
-if orden == 2
+if Order == 2
 for ny=1:Ey
 for nx=1:Ex
     X=linspace(Lcx(nx),Lcx(nx+1));
