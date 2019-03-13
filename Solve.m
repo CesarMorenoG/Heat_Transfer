@@ -99,7 +99,7 @@ Temperatura=sym('T',[Ex*Ey 1]);
 for ny=1:Ey
 for nx=1:Ex
     N = Lin_int_fun( Lx,Ly,Lcx,Lcy,nx,ny );
-    Temperatura((ny-1)*Ex+nx)=N(1)*Heat(ny,nx)+N(2)*Heat(ny+1,nx)+N(3)*Heat(ny,nx+1)+N(4)*Heat(ny+1,nx+1);
+    Temperatura((ny-1)*Ex+nx)=N(1)*Heat(ny,nx)+N(2)*Heat(ny,nx+1)+N(3)*Heat(ny+1,nx)+N(4)*Heat(ny+1,nx+1);
 end
 end
 end
@@ -109,7 +109,7 @@ Temperatura=sym('T',[Ex*Ey 1]);
 for ny=1:Ey
 for nx=1:Ex
     N = Cuad_int_fun( Lx,Ly,Lcx,Lcy,nx,ny );
-    Temperatura((ny-1)*Ex+nx)=N(1)*Heat(2*ny-1,2*nx-1)+N(2)*Heat(2*ny,2*nx-1)+N(3)*Heat(2*ny+1,2*nx-1)+N(4)*Heat(2*ny-1,2*nx)+N(5)*Heat(2*ny,2*nx)+N(6)*Heat(2*ny+1,2*nx)+N(7)*Heat(2*ny-1,2*nx+1)+N(8)*Heat(2*ny,2*nx+1)+N(9)*Heat(2*ny+1,2*nx+1);
+    Temperatura((ny-1)*Ex+nx)=N(1)*Heat(2*ny-1,2*nx-1)+N(2)*Heat(2*ny-1,2*nx)+N(3)*Heat(2*ny-1,2*nx+1)+N(4)*Heat(2*ny,2*nx-1)+N(5)*Heat(2*ny,2*nx)+N(6)*Heat(2*ny,2*nx+1)+N(7)*Heat(2*ny+1,2*nx-1)+N(8)*Heat(2*ny+1,2*nx)+N(9)*Heat(2*ny+1,2*nx+1);
 end
 end
 end
