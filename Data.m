@@ -1,19 +1,34 @@
-function [ orden,Ex,Ey,Lx,Ly,Lcx,Lcy,A_e,A_geo,Q_gen,kx,ky ] = Data()
+function [ Coord,Order,Ex,Ey,Lx,Ly,Lcx,Lcy,A_e,A_geo,Q_gen,kx,ky ] = Data()
+
+Coord=0;
+while Coord~=1 && Coord~=2
+    Coord=input('What coordinate system are you using (Cartesian:1, Cylindrical:2): ');
+end
 
 %Solicita el orden de las funciones de interpolacion
-orden=input('Select the order of the interpolation functions (1,2): ');
+Order=input('Select the order of the interpolation functions (1,2): ');
 
 %Solicita la longitud de la geometria
-Longitud_x=input('Length of the geometry in the x direction: ');
-Longitud_y=input('Length of the geometry in the y direction: ');
+if Coord==1
+    Longitud_x=input('Length of the geometry in the x direction: ');
+    Longitud_y=input('Length of the geometry in the y direction: ');
+elseif Coord==2
+    Longitud_x=input('Length of the geometry in the r direction: ');
+    Longitud_y=input('Length of the geometry in the z direction: ');
+end
 
 %Solicita el numero de elementos
-Ex=input('Number of elements in the x direction: ');
-Ey=input('Number of elements in the y direction: ');
+if Coord==1
+    Ex=input('Number of elements in the x direction: ');
+    Ey=input('Number of elements in the y direction: ');
+elseif Coord==2
+    Ex=input('Number of elements in the r direction: ');
+    Ey=input('Number of elements in the z direction: ');
+end
 
-control=input('Are the elements of uniform size?(Si:1,No:0) ');
+uniform=input('Are the elements of uniform size?(Yes:1,No:0) ');
 
-if orden == 1
+if Order == 1
     A_e=[1 2;3 4];
 
     A_geo=zeros(Ey+1,Ex+1);
@@ -24,7 +39,7 @@ if orden == 1
     end
 end
 
-if orden == 2
+if Order == 2
     A_e=[1 2 3;4 5 6;7 8 9];
 
     A_geo=zeros(2*Ey+1,2*Ex+1);
@@ -40,7 +55,7 @@ Ly=zeros(1,Ey+1);
 Lx(1)=0;
 Ly(1)=0;
 
-if control==1;
+if uniform==1;
     for nx=2:Ex+1
         Lx(nx)=Longitud_x/Ex; 
     end
@@ -49,7 +64,7 @@ if control==1;
     end
 end
 
-if control==0;
+if uniform==0;
     for nx=2:Ex
         fprintf('Lengh of the element %d in x: ',nx-1);
         Lx(nx)=input('');  
@@ -68,9 +83,14 @@ Lcy=cumsum(Ly);
 %Solicita el calor generado
 Q_gen=input('Generated heat: ');
 
-%Solicita las conductividades
-kx=input('Thermal conductivity along the x axis '); 
-ky=input('Thermal conductivity along the y axis '); 
+%Solicita las conductividades termicas del material
+if Coord==1
+    kx=input('Thermal conductivity along the x axis '); 
+    ky=input('Thermal conductivity along the y axis '); 
+elseif Coord==2
+    kx=input('Thermal conductivity along the r axis '); 
+    ky=input('Thermal conductivity along the z axis '); 
+end
 
 end
 

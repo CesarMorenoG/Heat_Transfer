@@ -1,11 +1,11 @@
-function [ T,Kpar,Qpar ] = Elements_par( orden,Ex,Ey,Lx,Ly,Lcx,Lcy,Q_gen,kx,ky )
+function [ T,K,Q ] = Elements_par( Coord,Order,Ex,Ey,Lx,Ly,Lcx,Lcy,Q_gen,kx,ky )
 
 syms x y
 
-if orden == 1 
+if Order == 1 
 T = sym('T',[(Ex+1)*(Ey+1) 1]);
-Kpar=zeros(4,4,Ex*Ey);
-Qpar=zeros(4,1,Ex*Ey);
+K=zeros(4,4,Ex*Ey);
+Q=zeros(4,1,Ex*Ey);
 
 parfor n=1:Ex*Ey*16
     
@@ -43,7 +43,7 @@ parfor n=1:Ex*Ey*16
     
     N = Lin_int_fun(Lx,Ly,Lcx,Lcy,nx,ny);
 
-    Kpar(n) = K( N,kx,ky,i,j,nx,ny,Lcx,Lcy );
+    K(n) = K_coeff( Coord,N,kx,ky,i,j,nx,ny,Lcx,Lcy );
     
 end
 
@@ -73,15 +73,15 @@ parfor n=1:Ex*Ey*4
     
     N = Lin_int_fun(Lx,Ly,Lcx,Lcy,nx,ny);
     
-    Qpar(n) = Q( N,Q_gen,j,nx,ny,Lcx,Lcy );
+    Q(n) = Q_coeff( Coord,N,Q_gen,j,nx,ny,Lcx,Lcy );
     
 end
 end
 
-if orden == 2
+if Order == 2
 T = sym('T',[(2*Ex+1)*(2*Ey+1) 1]);
-Kpar=zeros(9,9,Ex*Ey);
-Qpar=zeros(9,1,Ex*Ey);
+K=zeros(9,9,Ex*Ey);
+Q=zeros(9,1,Ex*Ey);
 
 parfor n=1:Ex*Ey*81
     
@@ -119,7 +119,7 @@ parfor n=1:Ex*Ey*81
     
     N = Cuad_int_fun(Lx,Ly,Lcx,Lcy,nx,ny);
     
-    Kpar(n) = K( N,kx,ky,i,j,nx,ny,Lcx,Lcy );
+    K(n) = K_coeff( Coord,N,kx,ky,i,j,nx,ny,Lcx,Lcy );
     
 end
 
@@ -149,7 +149,7 @@ parfor n=1:Ex*Ey*9
     
     N = Cuad_int_fun(Lx,Ly,Lcx,Lcy,nx,ny);
     
-    Qpar(n) = Q( N,Q_gen,j,nx,ny,Lcx,Lcy );
+    Q(n) = Q_coeff( Coord,N,Q_gen,j,nx,ny,Lcx,Lcy );
     
 end
 end
